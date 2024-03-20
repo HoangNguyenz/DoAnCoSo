@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dung quản lý sách</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+    <style>
+    .book-image {
+<!--        width: 265px;-->
+<!--        height: 250px;-->
+<!--        object-fit: cover;-->
+    }
+</style>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+
+<!--banner chính-->
+<header>
+    <div class="py-5" style="background-image: url('https://theme.hstatic.net/200000343865/1001052087/14/ms_banner_img4.jpg?v=107');
+        background-position: center;
+        background-size: cover;
+        width: 100vw;
+        height: 1000px;">
+    </div>
+</header>
+
+
+
+<!--list sách văn học-->
+<section class="py-5">
+    <div class="col-12 mb-4 text-center">
+        <h4 class="fw-bold">Sách mới</h4>
+    </div>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <!-- Replace this div with Thymeleaf loop -->
+            <div th:each="book: ${books}" class="col mb-5">
+                <div class="card h-100 w-55">
+                    <!-- Product image-->
+                    <img class="card-img-top book-image" th:src="@{/{imageName}(imageName=${book.imagePath})}" alt="Book Image" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder" th:text="${book.title}"></h5>
+                            <!-- Product price-->
+                            <span th:text="${book.formattedPrice}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" th:href="@{/home/details/{id}(id=${book.id})}">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--banner manga collection-->
+<div class="py-5" style="background-image: url('https://theme.hstatic.net/200000343865/1001052087/14/banner_home_pro_5.jpg?v=107');
+        background-position: center;
+        background-size: cover;
+        width: 100vw;">
+</div>
+
+<!--list manga-->
+<section class="py-5">
+    <div class="col-12 mb-4 text-center">
+        <h4 class="fw-bold">Manga - Comic</h4>
+    </div>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <!-- Replace this div with Thymeleaf loop -->
+            <div th:each="book: ${booksManga}" class="col mb-5">
+                <div class="card h-100 w-55">
+                    <!-- Product image-->
+                    <img class="card-img-top book-image" th:src="@{/{imageName}(imageName=${book.imagePath})}" alt="Book Image" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder" th:text="${book.title}"></h5>
+                            <!-- Product price-->
+                            <span th:text="${book.formattedPrice}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" th:href="@{/home/details/{id}(id=${book.id})}">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--banner doraemon collection-->
+<div class="py-5" style="background-image: url('https://theme.hstatic.net/200000343865/1001052087/14/banner_home_pro_6.jpg?v=107');
+        background-position: center;
+        background-size: cover;
+        width: 100vw;">
+</div>
+
+<!--list doraemon-->
+<section class="py-5">
+    <div class="col-12 mb-4 text-center">
+        <h4 class="fw-bold">Doraemon</h4>
+    </div>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <!-- Replace this div with Thymeleaf loop -->
+            <div th:each="book: ${booksDoraemon}" class="col mb-5">
+                <div class="card h-100 w-55">
+                    <!-- Product image-->
+                    <img class="card-img-top book-image" th:src="@{/{imageName}(imageName=${book.imagePath})}" alt="Book Image" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder" th:text="${book.title}"></h5>
+                            <!-- Product price-->
+                            <span th:text="${book.formattedPrice}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" th:href="@{/home/details/{id}(id=${book.id})}">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--banner hồ sơ tâm lý tội phạm collection-->
+<div class="py-5" style="background-image: url('https://theme.hstatic.net/200000343865/1001052087/14/banner_home_pro_7.jpg?v=107');
+        background-position: center;
+        background-size: cover;
+        width: 100vw;">
+</div>
+
+<!--list hồ sơ tâm lý tội phạm-->
+<section class="py-5">
+    <div class="col-12 mb-4 text-center">
+        <h4 class="fw-bold">WingBooks</h4>
+    </div>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <!-- Replace this div with Thymeleaf loop -->
+            <div th:each="book: ${booksHSTL}" class="col mb-5">
+                <div class="card h-100 w-55">
+                    <!-- Product image-->
+                    <img class="card-img-top book-image" th:src="@{/{imageName}(imageName=${book.imagePath})}" alt="Book Image" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder" th:text="${book.title}"></h5>
+                            <!-- Product price-->
+                            <span th:text="${book.formattedPrice}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" th:href="@{/home/details/{id}(id=${book.id})}">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>

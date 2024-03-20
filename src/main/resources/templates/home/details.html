@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:replace="layout :: link-css"></th:block>
+  <title>Book Details</title>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-md-6">
+          <img class="card-img-top mb-5 mb-md-0" th:src="@{/{imageName}(imageName=${book.imagePath})}" alt="Book Image"/>
+        </div>
+        <div class="col-md-6">
+          <div class="small mb-1">
+            <p><strong>Tác giả:</strong> <span th:text="' ' + ${book.author}"></span></p>
+          </div>
+          <h1 th:text="${book.title}" class="display-5 fw-bolder"></h1>
+          <div class="fs-5 mb-5">
+            <span th:text="${book.formattedPrice}" class="text-danger"></span>
+          </div>
+          <div class="fs-5 mb-5">
+            <p><strong>Bộ sách:</strong> <span th:text="' ' + ${book.category.name}"></span></p>
+          </div>
+          <div class="fs-5 mb-5">
+            <p><strong>Số trang:</strong> <span th:text="' ' + ${book.SoTrang}"></span></p>
+          </div>
+          <div class="fs-5 mb-5">
+            <p><strong>Khuôn khổ:</strong> <span th:text="' ' + ${book.KhuonKho}"></span></p>
+          </div>
+          <div class="fs-5 mb-5">
+            <p><strong>Định dạng:</strong> <span th:text="' ' + ${book.DinhDang}"></span></p>
+          </div>
+          <div class="d-flex">
+            <form th:action="@{/books/add-to-cart}" method="post"
+                  class="d-inline">
+              <input type="hidden" name="id" th:value="${book.getId()}">
+              <input type="hidden" name="name"
+                     th:value="${book.getTitle()}">
+              <input type="hidden" name="price"
+                     th:value="${book.getPrice()}">
+              <button type="submit" class="btn btn-success"
+                      onclick="return confirm('Are you sure you want to add this book to cart?')">
+                Thêm vào giỏ hàng</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Related items section-->
+  <section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+      <h2 class="fw-bolder mb-4">Sản phẩm tương tự</h2>
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div th:each="book: ${books}" class="col mb-5">
+          <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top" th:src="@{/{imageName}(imageName=${book.imagePath})}" alt="Book Image" />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder" th:text="${book.title}"></h5>
+                <!-- Product price-->
+                <span th:text="${book.formattedPrice}" class="text-danger"></span>
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center">
+                <a class="btn btn-outline-dark mt-auto" th:href="@{/home/details/{id}(id=${book.id})}">Chi tiết</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+</div>
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>

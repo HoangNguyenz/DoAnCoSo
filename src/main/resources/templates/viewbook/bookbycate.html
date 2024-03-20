@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ứng dung quản lý sách</title>
+  <th:block th:replace="layout :: link-css"></th:block>
+  <style>
+    .categorySidebar {
+    margin-top: 125px;
+    border: 0.5px solid black; /* Example border style, width, and color */
+    height: fit-content;
+    padding: 15px;
+}
+.abc{
+    display:block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 10px;
+}
+.abc:hover {
+    background-color: #f2f2f2; /* Màu nền khi hover */
+    /* Thêm các thuộc tính khác cho hiệu ứng hover */
+}
+</style>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+
+<!--banner chính-->
+<header>
+  <div class="py-5" style="background-image: url('https://theme.hstatic.net/200000343865/1001052087/14/ms_banner_img4.jpg?v=107');
+        background-position: center;
+        background-size: cover;
+        width: 100vw;
+        height: 1000px;">
+  </div>
+</header>
+
+
+
+<!--list tất cả sách-->
+<div class="container">
+  <div class="row">
+    <div class="categorySidebar col-md-3">
+      <a class="abc" th:each="category: ${categories}" th:href="@{/view/viewBookByCate/{categoryName}(categoryName=${category.name})}"
+         th:text="${category.name} "></a>
+    </div>
+    <div class="col-md-9">
+      <section class="py-5">
+        <div class="col-12 mb-4 text-center">
+          <h4 class="fw-bold">Tất cả cuốn sách</h4>
+        </div>
+        <div class="container px-4 px-lg-5 mt-5">
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <!-- Replace this div with Thymeleaf loop -->
+            <div th:each="book: ${books}" class="col mb-5">
+              <div class="card h-100 w-55">
+                <!-- Product image-->
+                <img class="card-img-top book-image" th:src="@{/{imageName}(imageName=${book.imagePath})}" alt="Book Image" />
+                <!-- Product details-->
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder" th:text="${book.title}"></h5>
+                    <!-- Product price-->
+                    <span th:text="${book.formattedPrice}" class="text-danger"></span>
+                  </div>
+                </div>
+                <!-- Product actions-->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" th:href="@{/home/details/{id}(id=${book.id})}">Chi tiết</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
+
